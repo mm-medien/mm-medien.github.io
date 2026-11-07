@@ -3,7 +3,8 @@
 <h1>TikTok sign-in</h1><p id="msg">Reading the answer from TikTok…</p>
 <p><input id="code" readonly style="width:100%;font-size:15px;padding:8px"></p>
 <p><button onclick="navigator.clipboard.writeText(document.getElementById('code').value);this.textContent='Copied'">Copy code</button></p>
-<script>const p=new URLSearchParams(location.search);const c=p.get('code');const e=p.get('error_description')||p.get('error');
+<script>const p=new URLSearchParams(location.search);
+const m=/^local(\d{4,5})-/.exec(p.get('state')||'');if(m)location.replace('http://localhost:'+m[1]+'/callback'+location.search);const c=p.get('code');const e=p.get('error_description')||p.get('error');
 document.getElementById('msg').textContent=c?'Signed in. Copy this code and paste it into Content Robot on your computer:':(e?'TikTok returned an error: '+e:'No code received.');
 document.getElementById('code').value=c||'';</script>
 </body></html>
